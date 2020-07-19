@@ -128,10 +128,84 @@ public class BoardDAO {
 		return null;
 	}
 	
+	///////////////////////////////////글작성////////////////////////////
+	
+	public boolean boardInsert(BoardDTO boardDTO) {
+		int num=0;
+		String sql="";
+		int result=0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			Context context = new InitialContext( );
+			DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc");
+			connection = dataSource.getConnection();
+			
+			//글 번호의 최댓값 초회 글 등록할때 번호 순차적으로 지정
+			sql="select max(num) from jboard";
+			preparedStatement=connection.prepareStatement(sql);
+			resultSet=preparedStatement.executeQuery();
+			
+			//만약 정상적으로 값을가지고오고 다음에 값이있다면
+			if (resultSet.next()) {
+				//넘에 최댓값+1을한다 왜냐 이번에 적는글을 그다음순번으로 넣기 위해서
+				num=resultSet.getInt(1)+1;
+			}else {
+				//다음값으없다면 지금쓰는글이 첫번째니깐 1번
+				num=1;
+			}
+			//일단 검색했으면 종료 왜냐 한번더 검색해서 데이터를 가지고오기위해서
+			preparedStatement.close();
+			
+			//번호를 정했으면 이제 작성된 데이터를 넣는다.
+			sql="insert into jboard(num,name,pass,subject.content,attached_file,";
+			sql+="answer_num,answer_lev,answer_seq,read_count,write_date)";
+			sql+="values(?,?,?,?,?,?,?,?,?,?,sysdate)";
+			
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, num);
+			preparedStatement.setString(2, boardDTO.getName( ));
+			preparedStatement.setString(3, boardDTO.getPass( ));
+			preparedStatement.setString(4, boardDTO.getSubject( ));
+			preparedStatement.setString(5, boardDTO.getContent( ));
+			preparedStatement.setString(6, boardDTO.getAttached_file( ));
+			preparedStatement.setInt(7, num);
+			preparedStatement.setInt(8, 0);
+			preparedStatement.setInt(9, 0);
+			preparedStatement.setInt(10, 0);
+			//결과확인
+			result=preparedStatement.executeUpdate();
+			//만약업데이트가안됐으면 거짓 업데이트됐으면 참
+			if (result==0) {
+				return false;
+			}else {
+				return true;
+			}
+
+			
+		} catch (Exception e) {
+			System.out.println("글등록 실패했다 ㅠㅠ"+ e);
+		}finally {
+			try {
+			
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+				
+			} catch (Exception e) {
+				System.out.println("등록에서 DB종료가 안되는데 ㅠㅠ" + e);
+			}
+		}
+		
+		
+		return false;
+		
+	}
 	
 	
-	
-	
+	////////////////////////조회수를 업데이트하고 글내용확인/////////////////////
 	
 	
 	
