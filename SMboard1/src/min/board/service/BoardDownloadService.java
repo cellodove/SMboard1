@@ -1,5 +1,16 @@
 package min.board.service;
 
-public class BoardDownloadService {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import min.board.action.Action;
+import min.board.command.ActionCommand;
+
+public class BoardDownloadService implements Action {
+
+	@Override
+	public ActionCommand execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return null;
+	}
 
 }
