@@ -39,7 +39,7 @@
 								&nbsp;
 							</c:forEach>
 						</c:if>
-						<a href="./BoardDetailService.do?num=<c:out value="${search.num}"/>">
+						<a href="./BoardDetail.do?num=<c:out value="${search.num}"/>">
 							<c:out value="${search.subject}"/>
 						</a>
 						</td>
