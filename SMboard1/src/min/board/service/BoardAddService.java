@@ -30,7 +30,7 @@ public class BoardAddService implements Action {
 					new DefaultFileRenamePolicy());
 			boardDTO.setName(multipartRequest.getParameter("name"));
 			boardDTO.setPass(multipartRequest.getParameter("pass"));
-			boardDTO.setSubject(multipartRequest.getParameter("Subject"));
+			boardDTO.setSubject(multipartRequest.getParameter("subject"));
 			boardDTO.setContent(multipartRequest.getParameter("content"));
 			boardDTO.setAttached_file(
 					multipartRequest.getFilesystemName((String) multipartRequest.getFileNames().nextElement()));

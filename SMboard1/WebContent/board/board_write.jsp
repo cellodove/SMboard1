@@ -35,7 +35,8 @@
 						<textarea id="content" name="content" cols="74" rows="15" required placeholder="글의 내용을 입력하세요."></textarea>
 					</p>
 					<p>
-						<label for="attached_file">파일 첨부 </label> <input type="file" id="attached_file" name="attached_file" placeholder="파일 첨부" />
+						<label for="attached_file">파일 첨부 </label> 
+						<input type="file" id="attached_file" name="attached_file" placeholder="파일 첨부" />
 					</p>
 					<div class="btnJoinArea">
 						<button type="submit" class="btnOk">글 등록</button>

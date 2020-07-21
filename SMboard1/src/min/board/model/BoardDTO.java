@@ -112,4 +112,12 @@ public class BoardDTO {
 		this.write_date = write_date;
 	}
 
+	@Override
+	public String toString() {
+		return "BoardDTO [num=" + num + ", name=" + name + ", pass=" + pass + ", subject=" + subject + ", content="
+				+ content + ", attached_file=" + attached_file + ", old_file=" + old_file + ", answer_num=" + answer_num
+				+ ", answer_lev=" + answer_lev + ", answer_seq=" + answer_seq + ", read_count=" + read_count
+				+ ", write_date=" + write_date + "]";
+	}
+
 }

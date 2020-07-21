@@ -21,8 +21,8 @@
 				<fieldset>
 					<legend>게시판 글 삭제</legend>
 					<p>
-						<label for="password"> 글 입력 비밀번호 <strong class="require">필수</strong>
-						</label> <input type="password" id="password" name="pass" required placeholder="비밀번호입력" size="12" />
+						<label for="password"> 글 입력 비밀번호 <strong class="require">필수</strong></label> 
+						<input type="password" id="password" name="pass" required placeholder="비밀번호입력" size="12" />
 					</p>
 					<div class="btnJoinArea">
 						<button type="submit" class="btnOk">삭제</button>

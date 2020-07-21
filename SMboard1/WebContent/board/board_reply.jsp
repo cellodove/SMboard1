@@ -18,10 +18,10 @@
 			<form action="./BoardReply.do" method="post" id="joinForm" name="boardform" enctype="multipart/form-data">
 				<fieldset>
 					<%--hidden 값으로 원본 글의 정보를 참조하여 답변 글의 내용을 설정한다.--%>
-						<input type="hidden" name="num" value="" /> 
-						<input type="hidden" name="answer_num" value="" /> 
-						<input type="hidden" name="answer_lev" value="" /> 
-						<input type="hidden" name="answer_seq" value="" />
+						<input type="hidden" name="num" value="<c:out value='${boardDTO.num}'/>"/>
+						<input type="hidden" name="answer_num" value="<c:out value='${boardDTO.answer_num}'/>"/>
+						<input type="hidden" name="answer_lev" value="<c:out value='${boardDTO.answer_lev}'/>"/>
+						<input type="hidden" name="answer_seq" value="<c:out value='${boardDTO.answer_seq}'/>"/>
 					<legend>답변 글 </legend>
 					<p>
 						<label for="name">글쓴이 <strong class="require">필수</strong></label>
@@ -30,7 +30,7 @@
 					<p>
 						<label for="subject">제목</label>
 						<%--원본 글의 제목을 호출한다.--%>
-						<input type="text" id="subject" name="subject" value="[답변]">
+						<input type="text" id="subject" name="subject" value="[답변]<c:out value="${boardDTO.subject}"/>">
 					</p>
 					<p>
 						<label for="content">내용</label>

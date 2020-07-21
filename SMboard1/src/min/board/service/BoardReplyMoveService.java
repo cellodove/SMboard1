@@ -5,12 +5,32 @@ import javax.servlet.http.HttpServletResponse;
 
 import min.board.action.Action;
 import min.board.command.ActionCommand;
+import min.board.dao.BoardDAO;
+import min.board.model.BoardDTO;
 
 public class BoardReplyMoveService implements Action {
 
 	@Override
 	public ActionCommand execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return null;
+		
+		ActionCommand actionCommand = new ActionCommand();
+		BoardDAO boardDAO = new BoardDAO();
+		BoardDTO boardDTO = new BoardDTO();
+		int num = Integer.parseInt(request.getParameter("num"));
+		boardDTO = boardDAO.getDetail(num);
+		
+		
+		if (boardDTO==null) {
+			System.out.println("답변 페이지 이동 실패");
+			return null;	
+		}
+		
+		//답변 페이지로 이동할 때 원본 글 내용을 저장한다.
+		System.out.println("답변 페이지 이동성공");
+		request.setAttribute("boardDTO", boardDTO);
+		actionCommand.setRedirect(false);
+		actionCommand.setPath("./board/board_reply.jsp");
+		
+		return actionCommand;
 	}
-
 }

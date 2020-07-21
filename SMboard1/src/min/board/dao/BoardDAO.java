@@ -112,8 +112,10 @@ public class BoardDAO {
 				boardDTO.setRead_count(resultSet.getInt("read_count"));
 				boardDTO.setWrite_date(resultSet.getDate("write_date"));
 				// 결과뽑아올때마다 리스트에 넣는다.
+				
 				list.add(boardDTO);
 			}
+			return list;
 		} catch (Exception e) {
 			System.out.println("글목록보기 실패했습니다 ㅠㅠ");
 			e.printStackTrace();
@@ -163,9 +165,9 @@ public class BoardDAO {
 			preparedStatement.close();
 
 			// 번호를 정했으면 이제 작성된 데이터를 넣는다.
-			sql = "insert into jboard(num,name,pass,subject.content,attached_file,";
+			sql = "insert into jboard (num,name,pass,subject,content,attached_file,";
 			sql += "answer_num,answer_lev,answer_seq,read_count,write_date)";
-			sql += "values(?,?,?,?,?,?,?,?,?,?,sysdate)";
+			sql += " values(?,?,?,?,?,?,?,?,?,?,sysdate)";
 
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, num);
@@ -301,7 +303,6 @@ public class BoardDAO {
 			Context context = new InitialContext();
 			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
 			connection = dataSource.getConnection();
-
 			sql = "select max(num) from jboard";
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
@@ -314,7 +315,7 @@ public class BoardDAO {
 			preparedStatement.close();
 			// 값을 1씩 증가시켜 현재 글을 답변 대상 글 바로 아래에 출력되게 처리한다.
 			sql = "update jboard set answer_seq=answer_seq+1";
-			sql = " where answer_num=? and answer_seq>?";
+			sql += " where answer_num=? and answer_seq>?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, answer_num);
 			preparedStatement.setInt(2, answer_seq);
@@ -379,7 +380,7 @@ public class BoardDAO {
 			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
 			connection = dataSource.getConnection();
 
-			String sql = "update jboard ser name=?,subject=?,content=?,attached_file=?";
+			String sql = "update jboard set name=?,subject=?,content=?,attached_file=?";
 			sql += " where num=?";
 
 			preparedStatement = connection.prepareStatement(sql);

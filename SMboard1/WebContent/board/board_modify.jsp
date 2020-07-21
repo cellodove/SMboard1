@@ -18,14 +18,14 @@
 			<form action="./BoardModifyService.do" method="post" id="joinForm" name="modifyform" enctype="multipart/form-data">
 				<fieldset>
 					<legend> 게시판 수정 </legend>
-					<input type="hidden" name="num"	value="" />
+					<input type="hidden" name="num"	value="<c:out value='${boardDTO.num}'/>"/>
 					<p>
 						<label for="name">이름 </label> 
-						<input type="text" id="name" name="name" value="" />
+						<input type="text" id="name" name="name" value="<c:out value='${boardDTO.name}'/>"/>
 					</p>
 					<p>
 						<label for="subject">제목 </label> 
-						<input type="text" id="subject"	name="subject" value="" />
+						<input type="text" id="subject"	name="subject" value="<c:out value='${boardDTO.subject}'/>"/>
 					</p>
 					<p>
 						<label for="content">내용</label>
@@ -35,9 +35,11 @@
 					<c:if test="${!empty boardDTO.attached_file}">
 						<p>
 							<label for="attached_file">파일 첨부</label><br />
-							&nbsp;&nbsp;&nbsp; 
-							<a>파일 다운 </a> 
-							<input type="hidden" name="old_file" value="" />
+							<c:out value="${boardDTO.attached_file}"/>&nbsp;&nbsp;&nbsp; 
+							<a href="./boardUpload/<c:out value='${boardDTO.attached_file}'/>">
+							파일 다운 
+							</a> 
+							<input type="hidden" name="old_file" value="<c:out value='${boardDTO.attached_file}'/>"/>
 						</p>
 					</c:if>
 					<p>
